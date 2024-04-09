@@ -13,15 +13,15 @@
         />
         <div class="column">
           <section>
-              <strong>00:00:00</strong>
+              <strong>{{tempoDecorrido}}</strong>
             </section>
-            <button class="button">
+            <button class="button" @click="iniciarContagem">
               <span class="icon">
                 <i class="fas fa-play"></i>
               </span>
               <span>play</span>
             </button>
-            <button class="button">
+            <button class="button" @click="finalizarContagem">
               <span class="icon">
                 <i class="fas fa-stop"></i>
               </span>
@@ -36,7 +36,31 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-    name: "CampoFormulario",
+  name: "CampoFormulario",
+  data() {
+    return {
+      tempoEmSegundo: 0
+    }
+  },
+  computed: {
+    tempoDecorrido(): string {
+      let data = new Date(this.tempoEmSegundo * 1000);
+      let tempoString = data.toISOString().slice(11, 19);
+
+      return tempoString;
+    }
+  },
+  methods: {
+    iniciarContagem() {
+      setInterval(() => {
+        this.tempoEmSegundo += 1
+        console.log(this.tempoEmSegundo);
+      }, 1000)
+    },
+    finalizarContagem() {
+      console.log('Terminando');
+    },
+  },
 });
 </script>
 <style scoped></style>
