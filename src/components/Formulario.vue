@@ -39,7 +39,8 @@ export default defineComponent({
   name: "CampoFormulario",
   data() {
     return {
-      tempoEmSegundo: 0
+      tempoEmSegundo: 0,
+      referenceInterval: 0
     }
   },
   computed: {
@@ -52,13 +53,13 @@ export default defineComponent({
   },
   methods: {
     iniciarContagem() {
-      setInterval(() => {
+      this.referenceInterval = setInterval(() => {
         this.tempoEmSegundo += 1
-        console.log(this.tempoEmSegundo);
       }, 1000)
     },
     finalizarContagem() {
-      console.log('Terminando');
+      clearInterval(this.referenceInterval)
+      this.tempoEmSegundo = 0
     },
   },
 });
