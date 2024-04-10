@@ -4,11 +4,9 @@
       <BarraLateral />
     </div>
     <div class="column is-three-quarter">
-      <Formulario />
+      <Formulario @aoSalvarTarefa="salvarTarefa"/>
       <div class="lista">
-        <Tarefa  />
-        <Tarefa  />
-        <Tarefa  />
+        <Tarefa v-for="(tarefasLocaisVindasDoEvento, index) in tarefas" :key="index" :tarefa="tarefasLocaisVindasDoEvento"/>
       </div>
     </div>
   </main>
@@ -16,6 +14,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+
+import ITarefa from './Interfaces/ITarefa.js' //Vue disse que só pode importar arquivos com extensão js...?
 
 import BarraLateral from "./components/BarraLateral.vue"
 import Formulario from "./components/Formulario.vue"
@@ -25,7 +25,17 @@ export default defineComponent({
   name: 'App',
   components: {
     BarraLateral, Formulario, Tarefa
-  }
+  },
+  data() {
+    return {
+      tarefas: [] as ITarefa[]
+    }
+  },
+  methods: {
+    salvarTarefa(tarefaRecebida: ITarefa) {
+      this.tarefas.push(tarefaRecebida)
+    }
+  },
 });
 </script>
 
