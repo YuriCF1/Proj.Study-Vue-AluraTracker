@@ -1,16 +1,6 @@
 <template lang="">
-    <div
-        class="column is-8"
-        role="form"
-        aria-label="Formulário para criação de uma nova tarefa"
-      >
-        <input
-          type="text"
-          class="input"
-          placeholder="Qual tarefa você deseja iniciar"
-        />
         <div class="column">
-          <Cronometro :tempoEmSegundos="tempoEmSegundo"/>
+          <Cronometro :tempoEmSegundos="tempoEmSegundosTemporizador"/>
             <button class="button" @click="iniciarContagem" :disabled="cronometroAtivado">
               <span class="icon">
                 <i class="fas fa-play"></i>
@@ -24,7 +14,6 @@
               <span>stop</span>
             </button>
         </div>
-      </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
@@ -32,12 +21,13 @@ import Cronometro from './Cronometro.vue';
 
 export default defineComponent({
     name: "TemporiZador",
+    emits: ['temporizadorFinalizado'],
     components: {
         Cronometro
     },
     data() {
         return {
-            tempoEmSegundo: 0,
+            tempoEmSegundosTemporizador: 0,
             referenceInterval: 0,
             cronometroAtivado: false
         }
@@ -46,13 +36,14 @@ export default defineComponent({
         iniciarContagem() {
             this.cronometroAtivado = true
             this.referenceInterval = setInterval(() => {
-                this.tempoEmSegundo += 1
+                this.tempoEmSegundosTemporizador += 1
             }, 1000)
         },
         finalizarContagem() {
             this.cronometroAtivado = false
             clearInterval(this.referenceInterval)
-            // this.tempoEmSegundo = 0
+            this.$emit('temporizadorFinalizado', this.tempoEmSegundosTemporizador)
+            this.tempoEmSegundosTemporizador = 0
         },
     },
 });
