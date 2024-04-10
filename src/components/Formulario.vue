@@ -26,6 +26,7 @@ import TemporiZador from './Temporizador.vue'
 
 export default defineComponent({
   name: "CampoFormulario",
+  emits: ['aoSalvarTarefa'],
   components: {
     TemporiZador
   },
@@ -36,8 +37,11 @@ export default defineComponent({
   },
   methods: {
     finalizarTarefa(tempoDecorridoRecebido: number): void {
-      console.log(tempoDecorridoRecebido);
-      console.log(this.desricaoTask);
+      this.$emit('aoSalvarTarefa', {
+        //Enviando os dados no formato da interface, pois no App.vue, ele espera os dados assim
+        duracaoEmSegundosInterface: tempoDecorridoRecebido, 
+        descricaoInterface: this.desricaoTask
+      })
       this.desricaoTask = ''
     }
   }
