@@ -1,66 +1,20 @@
 <template lang="">
   <div class="box is-white">
     <div class="column">
-      <div
-        class="column is-8"
-        role="form"
-        aria-label="Formulário para criação de uma nova tarefa"
-      >
-        <input
-          type="text"
-          class="input"
-          placeholder="Qual tarefa você deseja iniciar"
-        />
-        <div class="column">
-          <section>
-              <strong>{{tempoDecorrido}}</strong>
-            </section>
-            <button class="button" @click="iniciarContagem">
-              <span class="icon">
-                <i class="fas fa-play"></i>
-              </span>
-              <span>play</span>
-            </button>
-            <button class="button" @click="finalizarContagem">
-              <span class="icon">
-                <i class="fas fa-stop"></i>
-              </span>
-              <span>stop</span>
-            </button>
-        </div>
-      </div>
+      <TemporiZador  />
     </div>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import Cronometro from './Cronometro.vue'
+import TemporiZador from './Temporizador.vue'
+
 export default defineComponent({
   name: "CampoFormulario",
-  data() {
-    return {
-      tempoEmSegundo: 0,
-      referenceInterval: 0
-    }
-  },
-  computed: {
-    tempoDecorrido(): string {
-      let data = new Date(this.tempoEmSegundo * 1000);
-      let tempoString = data.toISOString().slice(11, 19);
-
-      return tempoString;
-    }
-  },
-  methods: {
-    iniciarContagem() {
-      this.referenceInterval = setInterval(() => {
-        this.tempoEmSegundo += 1
-      }, 1000)
-    },
-    finalizarContagem() {
-      clearInterval(this.referenceInterval)
-      this.tempoEmSegundo = 0
-    },
+  components: {
+    TemporiZador
   },
 });
 </script>
