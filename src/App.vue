@@ -4,10 +4,15 @@
       <BarraLateral />
     </div>
     <div class="column is-three-quarter">
-      <Formulario @aoSalvarTarefa="salvarTarefa"/>
+      <Formulario @aoSalvarTarefa="salvarTarefa" />
       <div class="lista">
-        <Tarefa v-for="(tarefasLocaisVindasDoEvento, index) in tarefas" :key="index" :tarefa="tarefasLocaisVindasDoEvento"/>
-      </div>
+          <Tarefa v-for="(tarefasLocaisVindasDoEvento, index) in tarefas" :key="index"
+            :tarefa="tarefasLocaisVindasDoEvento" />
+          <Box  v-if="!tarefas.length">
+          <!-- <Box  v-if="listaEstaVazia"> -->
+            Não há tarefas adicionadas
+          </Box>
+        </div>
     </div>
   </main>
 </template>
@@ -20,17 +25,24 @@ import ITarefa from './Interfaces/ITarefa.js' //Vue disse que só pode importar 
 import BarraLateral from "./components/BarraLateral.vue"
 import Formulario from "./components/Formulario.vue"
 import Tarefa from './components/Tarefa.vue'
+import Box from './components/Box.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    BarraLateral, Formulario, Tarefa
+    BarraLateral, Formulario, Tarefa, Box
   },
   data() {
     return {
       tarefas: [] as ITarefa[]
     }
   },
+  //Resolvi fazer o v-if de outro jeito
+  // computed: {
+  //   listaEstaVazia(): boolean {
+  //     return this.tarefas.length === 0;
+  //   }
+  // },
   methods: {
     salvarTarefa(tarefaRecebida: ITarefa) {
       this.tarefas.push(tarefaRecebida)
