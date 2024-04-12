@@ -1,24 +1,26 @@
 <template>
-  <main class="columns is-gapless is-multiline">
+  <main class="columns is-gapless is-multiline" :class="{'modo-claro': modoEscuroTaAtivo}">
+    <!-- //ALTERNATIVA PARA PASSAR OS ESTILOS, COMO PROPRIEDADE (BOM EM SITUAÇÕES EONDE ELA MUDA DE ACORDO COM O ESTADO DE ALGO) -->
+    <!-- <main :style="estilos"> -->
     <div class="column is-one-quarter">
-      <BarraLateral />
+      <BarraLateral @temaAlterado="trocarTema" />
     </div>
-    <div class="column is-three-quarter">
-      <Formulario @aoSalvarTarefa="salvarTarefa" />
+    <div class="column is-three-quarter conteudo">
+      <Formulario @aoSalvarTarefa="salvarTarefa"/>
       <div class="lista">
-          <Tarefa v-for="(tarefasLocaisVindasDoEvento, index) in tarefas" :key="index"
-            :tarefa="tarefasLocaisVindasDoEvento" />
-          <Box  v-if="!tarefas.length">
+        <Tarefa v-for="(tarefasLocaisVindasDoEvento, index) in tarefas" :key="index"
+          :tarefa="tarefasLocaisVindasDoEvento" />
+        <Box v-if="!tarefas.length">
           <!-- <Box  v-if="listaEstaVazia"> -->
-            Não há tarefas adicionadas
-          </Box>
-        </div>
+          Não há tarefas adicionadas
+        </Box>
+      </div>
     </div>
   </main>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 import ITarefa from './Interfaces/ITarefa.js' //Vue disse que só pode importar arquivos com extensão js...?
 
@@ -34,7 +36,13 @@ export default defineComponent({
   },
   data() {
     return {
-      tarefas: [] as ITarefa[]
+      tarefas: [] as ITarefa[],
+      modoEscuroTaAtivo: false,
+      //ALTERNATIVA PARA PASSAR OS ESTILOS, COMO PROPRIEDADE (BOM EM SITUAÇÕES EONDE ELA MUDA DE ACORDO COM O ESTADO DE ALGO)
+      // estilos: {
+      //   'color': 'red',
+      //   backgroundColor: 'red'
+      // }
     }
   },
   //Resolvi fazer o v-if de outro jeito
@@ -46,13 +54,25 @@ export default defineComponent({
   methods: {
     salvarTarefa(tarefaRecebida: ITarefa) {
       this.tarefas.push(tarefaRecebida)
+    },
+    trocarTema(modoEscuroAtivo: boolean) {
+      this.modoEscuroTaAtivo = modoEscuroAtivo
+      console.log('Botaoclicado');
+      console.log(this.modoEscuroTaAtivo);
+      console.log(modoEscuroAtivo);
     }
   },
 });
 </script>
 
-<style scoped>
+<style>
 .lista {
   padding: 1.25;
+}
+
+.modo-claro{
+  background-color:rgb(211, 211, 211);
+  color: #0c0c0c;
+
 }
 </style>
