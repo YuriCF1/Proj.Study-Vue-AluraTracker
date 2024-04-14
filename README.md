@@ -35,7 +35,7 @@ Using Vue, the project acepts an input of the task you want to track it. Press '
 - [ X ] Change backgroun feature
 - [ X ] Add tas to the list
 
-<img src="https://raw.githubusercontent.com/YuriCF1/Proj.Study-Vue/main/src/assets/example.png" alt="imagem do site">
+<img src="https://raw.githubusercontent.com/YuriCF1/Proj.Study-Vue-AluraTracker/1bf670a9a0eaed691564fb53f824049c76386174/src/assets/example.png" alt="Imagem do site">
 
 ## 🤝 Colaborators
 
