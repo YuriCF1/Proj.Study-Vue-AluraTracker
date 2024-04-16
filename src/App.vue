@@ -6,15 +6,7 @@
       <BarraLateral @temaAlterado="trocarTema" />
     </div>
     <div class="column is-three-quarter conteudo">
-      <Formulario @aoSalvarTarefa="salvarTarefa"/>
-      <div class="lista">
-        <Tarefa v-for="(tarefasLocaisVindasDoEvento, index) in tarefas" :key="index"
-          :tarefa="tarefasLocaisVindasDoEvento" />
-        <Box v-if="!tarefas.length">
-          <!-- <Box  v-if="listaEstaVazia"> -->
-          Não há tarefas adicionadas
-        </Box>
-      </div>
+    <router-view></router-view>
     </div>
   </main>
 </template>
@@ -22,21 +14,22 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 
-import ITarefa from './Interfaces/ITarefa.js' //Vue disse que só pode importar arquivos com extensão js...?
+// import ITarefa from './Interfaces/ITarefa.js' //Vue disse que só pode importar arquivos com extensão js...?
 
 import BarraLateral from "./components/BarraLateral.vue"
-import Formulario from "./components/Formulario.vue"
-import Tarefa from './components/Tarefa.vue'
-import Box from './components/Box.vue'
+// import Formulario from "./components/Formulario.vue"
+// import Tarefa from './components/Tarefa.vue'
+// import Box from './components/Box.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    BarraLateral, Formulario, Tarefa, Box
+    // Tarefa, Box
+    BarraLateral
   },
   data() {
     return {
-      tarefas: [] as ITarefa[],
+      // tarefas: [] as ITarefa[],
       modoEscuroTaAtivo: false,
       //ALTERNATIVA PARA PASSAR OS ESTILOS, COMO PROPRIEDADE (BOM EM SITUAÇÕES EONDE ELA MUDA DE ACORDO COM O ESTADO DE ALGO)
       // estilos: {
@@ -52,9 +45,9 @@ export default defineComponent({
   //   }
   // },
   methods: {
-    salvarTarefa(tarefaRecebida: ITarefa) {
-      this.tarefas.push(tarefaRecebida)
-    },
+    // salvarTarefa(tarefaRecebida: ITarefa) {
+    //   this.tarefas.push(tarefaRecebida)
+    // },
     trocarTema(modoEscuroAtivo: boolean) {
       this.modoEscuroTaAtivo = modoEscuroAtivo
       console.log('Botaoclicado');
