@@ -1,12 +1,12 @@
 <template>
-  <main class="columns is-gapless is-multiline" :class="{'modo-claro': modoEscuroTaAtivo}">
+  <main class="columns is-gapless is-multiline" :class="{ 'modo-claro': modoEscuroTaAtivo }">
     <!-- //ALTERNATIVA PARA PASSAR OS ESTILOS, COMO PROPRIEDADE (BOM EM SITUAÇÕES EONDE ELA MUDA DE ACORDO COM O ESTADO DE ALGO) -->
     <!-- <main :style="estilos"> -->
     <div class="column is-one-quarter">
       <BarraLateral @temaAlterado="trocarTema" />
     </div>
     <div class="column is-three-quarter conteudo">
-    <router-view></router-view>
+      <router-view></router-view>
     </div>
   </main>
 </template>
@@ -63,8 +63,8 @@ export default defineComponent({
   padding: 1.25;
 }
 
-.modo-claro{
-  background-color:rgb(211, 211, 211);
+.modo-claro {
+  background-color: rgb(211, 211, 211);
   color: #0c0c0c;
 
 }
