@@ -20,7 +20,7 @@
               <option value="">Selecione o projeto</option>
               <option
                 :value="projeto.id"
-                v-for="projeto in projetos"
+                v-for="projeto in projetosComputedEstado"
                 :key="projeto.id"
               >
                 {{ projeto.nome }}
@@ -51,7 +51,8 @@ export default defineComponent({
   data() {
     return {
       desricaoTask: '',
-      idProjeto: String
+      idProjeto: '',
+      projetos: ''
     }
   },
   methods: {
@@ -59,7 +60,8 @@ export default defineComponent({
       this.$emit('aoSalvarTarefa', {
         //Enviando os dados no formato da interface, pois no App.vue, ele espera os dados assim
         duracaoEmSegundosInterface: tempoDecorridoRecebido,
-        descricaoInterface: this.desricaoTask
+        descricaoInterface: this.desricaoTask,
+        projetos: this.projetosComputedEstado.find(proj => proj.id == this.idProjeto)
       })
       this.desricaoTask = ''
     }
@@ -67,7 +69,7 @@ export default defineComponent({
   setup() {
     const store = useStore(key);
     return { //Tudo que se retorna no setup, fica disponível no componente
-      projetos: computed(() => store.state.projetos) //Colocar no computed pois a lista é dinâmica
+      projetosComputedEstado: computed(() => store.state.projetos) //Colocar no computed pois a lista é dinâmica
     }
   }
 });
