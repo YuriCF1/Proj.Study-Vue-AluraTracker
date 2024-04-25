@@ -48,10 +48,11 @@ export default defineComponent({
     },
     methods: {
         salvarProjeto() {
-            const projeto = {
-                id: new Date().toISOString(),
-                nome: this.nomeDoProjeto
-            }
+            // const projeto = {
+            //     id: new Date().toISOString(),
+            //     nome: this.nomeDoProjeto
+            // }
+            this.store.commit("ADICIONA_PROJETO", this.nomeDoProjeto)
 
             this.listaProjetos.push(projeto)
         }
