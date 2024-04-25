@@ -33,7 +33,7 @@
     </section>
 </template>
 <script>
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, computed} from 'vue';
 
 import IProjeto from '../Interfaces/IProjeto.ts'
 import { useStore } from '@/store';
@@ -60,7 +60,8 @@ export default defineComponent({
     setup() {
         const store = useStore()
         return {
-            store
+            store, 
+            listaProjetos: computed(() => store.state.projetos)
         }
     }
 })
