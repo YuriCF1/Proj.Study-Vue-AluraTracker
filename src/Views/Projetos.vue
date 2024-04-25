@@ -36,6 +36,7 @@
 import { defineComponent, PropType } from 'vue';
 
 import IProjeto from '../Interfaces/IProjeto.ts'
+import { useStore } from '@/store';
 
 export default defineComponent({
     name: 'ProjetosComponent',
@@ -53,6 +54,12 @@ export default defineComponent({
             }
 
             this.listaProjetos.push(projeto)
+        }
+    },
+    setup() {
+        const store = useStore()
+        return {
+            store
         }
     }
 })
