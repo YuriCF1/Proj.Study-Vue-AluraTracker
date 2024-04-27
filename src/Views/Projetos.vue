@@ -1,35 +1,34 @@
 <template lang="">
     <section class="projetos">
-        <h1 class="title">
-            Projetos
-        </h1>
-        <form @submit.prevent="salvarProjeto">
-            <div class="field">
-                <label class="label" for="nomeDoProjeto" >
-                    Nome do projeto
-                </label>
-                <input class="input" type="text" name="" id="nomeDoProjeto" v-model="nomeDoProjeto"/>
-            </div>
-            <div class="field">
-                <button class="button" type="submit">
-                    Salvar
-                </button>
-            </div>
-        </form>
+        <h1 class="titles">Projetos</h1>
+        <router-link to="/projetos/novo" class="button">
+            <span class="icon is-small">
+                <i class="fas fa-plus"></i>
+             </span>
+            <span>Novo projeto</span>
+        </router-link>
         <table class="table is-fullwidth">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nome</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
                 <tbody>
                     <tr v-for="(projeto, index) in listaProjetos" :key="index">
                         <td>{{projeto.id}}</td>
                         <td>{{projeto.nome}}</td>
+                        <td>
+                            <router-link :to="`/projetos/${projeto.id}`" class="button">
+                            <span class="icon is-small">
+                            <i class="fas fa-pencil-alt"></i>
+              </span>
+            </router-link>
+                        </td>
                     </tr>
                 </tbody>
-        </table>
+        </table> 
     </section>
 </template>
 <script>
@@ -40,27 +39,9 @@ import { useStore } from '@/store';
 
 export default defineComponent({
     name: 'ProjetosComponent',
-    data() {
-        return {
-            nomeDoProjeto: '',
-            listaProjetos: [],
-        }
-    },
-    methods: {
-        salvarProjeto() {
-            // const projeto = {
-            //     id: new Date().toISOString(),
-            //     nome: this.nomeDoProjeto
-            // }
-            this.store.commit("ADICIONA_PROJETO", this.nomeDoProjeto)
-
-            this.listaProjetos.push(projeto)
-        }
-    },
     setup() {
         const store = useStore()
         return {
-            store, 
             listaProjetos: computed(() => store.state.projetos)
         }
     }
