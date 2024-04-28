@@ -22,7 +22,7 @@
 import { defineComponent, PropType, computed } from 'vue';
 
 // import IProjeto from '../Interfaces/IProjeto.ts'
-import { useStore } from '@/store';
+import { useStoreFunction } from '@/store';
 
 export default defineComponent({
     name: 'FormularioComponent',
@@ -39,7 +39,7 @@ export default defineComponent({
         }
     },
     setup() {
-        const store = useStore()
+        const store = useStoreFunction()
         return {
             store,
         }

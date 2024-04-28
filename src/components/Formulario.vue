@@ -18,8 +18,9 @@
           <div class="select">
             <select v-model="idProjeto">
               <option value="">Selecione o projeto</option>
+              <!-- Atribuindo o projeto.id dentro do value to select, onde tem idPorjeto -->
               <option
-                :value="projeto.id"
+                :value="projeto.id" 
                 v-for="projeto in projetosComputedEstado"
                 :key="projeto.id"
               >
