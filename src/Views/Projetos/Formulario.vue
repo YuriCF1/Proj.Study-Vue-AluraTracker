@@ -26,6 +26,17 @@ import { useStoreFunction } from '@/store';
 
 export default defineComponent({
     name: 'FormularioComponent',
+    prop: {
+        idProps: {
+            type: String
+        }
+    },mounted() {
+        if(this.idProps) {
+            const buscandoProjeto = 
+            this.store.state.projetos.find(proj => proj.id == this.idProps)
+            this.nomeDoProjeto = buscandoProjeto?.nome
+        }
+    },
     data() {
         return {
             nomeDoProjeto: '',
