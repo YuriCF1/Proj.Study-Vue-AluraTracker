@@ -19,9 +19,10 @@ const rotas: RouteRecordRaw[] = [
         component: Formulario
     },
     {
-        path: '/projetos/:id',
+        path: '/projetos/:idProps',
         name: 'Editar Projeto',
-        component: Formulario
+        component: Formulario,
+        props:true //O roteador vai pegar o idProps e vai injetar na vizualisação como props 
     }
 ];
 
