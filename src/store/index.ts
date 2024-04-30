@@ -1,3 +1,4 @@
+// import { Projetos } from '@/Views/Projetos.vue';
 import IProjeto from "@/Interfaces/IProjeto";
 import { InjectionKey } from "vue";
 // import { Store, createStore, useStore as vuexUseStore } from "vuex";
@@ -20,6 +21,11 @@ export const store = createStore<Estado>({
                 nome: nomeDoProjeto
             } as IProjeto
             state.projetos.push(projeto)
+        },
+        'EDITA_PROJETO'(state, projetoEditado: IProjeto) {
+            const index = state.projetos.findIndex(
+                proj => proj.id == projetoEditado.id )
+            state.projetos[index] = projetoEditado;
         }
     }
 })
