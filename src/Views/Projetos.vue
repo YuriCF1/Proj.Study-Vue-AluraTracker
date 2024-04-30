@@ -35,12 +35,12 @@
 import { defineComponent, PropType, computed } from "vue";
 
 import IProjeto from "../Interfaces/IProjeto.ts";
-import { useStore } from "@/store";
+import { useStoreFunction } from "@/store";
 
 export default defineComponent({
   name: "ProjetosComponent",
   setup() {
-    const store = useStore();
+    const store = useStoreFunction();
     return {
       listaProjetos: computed(() => store.state.projetos),
     };
