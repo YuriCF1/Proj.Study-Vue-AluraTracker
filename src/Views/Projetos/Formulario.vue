@@ -1,6 +1,6 @@
 <template lang="">
-  <section class="projetos">
-    <h1 class="title">Formulário</h1>
+  <section>
+    <h1 class="formulario-title">Formulário</h1>
     <form @submit.prevent="salvarProjeto">
       <div class="field">
         <label class="label" for="nomeDoProjeto"> Nome do projeto </label>
@@ -68,7 +68,10 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-.projetos {
-  padding: 1.25rem;
+.formulario-title {
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #fff;
 }
 </style>
