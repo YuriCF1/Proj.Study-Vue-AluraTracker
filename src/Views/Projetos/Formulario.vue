@@ -24,6 +24,8 @@ import { defineComponent, PropType, computed } from "vue";
 // import IProjeto from '../Interfaces/IProjeto.ts'
 import { useStoreFunction } from "@/store";
 
+import { ADICIONA_PROJETO, EDITA_PROJETO, } from "../../store/TipoDeMutacoes";
+
 export default defineComponent({
   name: "FormularioComponent",
   props: {
@@ -48,12 +50,12 @@ export default defineComponent({
   methods: {
     salvarProjeto() {
       if (this.idProps) {
-        this.store.commit("EDITA_PROJETO", {
+        this.store.commit(EDITA_PROJETO, {
           id: this.idProps,
           nome: this.nomeDoProjeto,
         });
       } else {
-        this.store.commit("ADICIONA_PROJETO", this.nomeDoProjeto);
+        this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto);
         this.nomeDoProjeto = "";
       }
       this.$router.push("/projetos");
