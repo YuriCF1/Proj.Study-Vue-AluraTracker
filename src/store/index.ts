@@ -5,16 +5,38 @@ import { InjectionKey } from "vue";
 import { Store, createStore, useStore } from "vuex";
 
 import { ADICIONA_PROJETO, EDITA_PROJETO, EXCLUIR_PROJETO } from "./TipoDeMutacoes";
+import INotificacao, { TipoDeNotificacao } from "@/Interfaces/INotificacao";
 
 interface Estado {
-    projetos: IProjeto[]
+    projetos: IProjeto[],
+    notificacoes: INotificacao[];
 }
 
 export const key: InjectionKey<Store<Estado>> = Symbol()
 
 export const store = createStore<Estado>({
     state: {
-        projetos: []
+        projetos: [],
+        notificacoes: [
+            {
+                title: "Sucesso",
+                text: "Ação realizada com sucesso",
+                tipo: TipoDeNotificacao.SUCCESS,
+                id: 1,
+            },
+            {
+                title: "Atenção",
+                text: "Atenção!",
+                tipo: TipoDeNotificacao.WARNING,
+                id: 2,
+            },
+            {
+                title: "Falha",
+                text: "Falha",
+                tipo: TipoDeNotificacao.FAIL,
+                id: 3,
+            }
+        ]
     },
     mutations: {
         [ADICIONA_PROJETO](state, nomeDoProjeto: string) { //State é colocado pela própria Vuex
@@ -41,7 +63,7 @@ export function useStoreFunction(): Store<Estado> {
 //NOTAS 
 
 /*
-Você vai perceber, analisando as documentações do Vuex, que existem actions e mutations. Existe uma linha tênue separando os dois;
+Você vai perceber, analisando as documentações do Vuex, que existem actions  e mutations. Existe uma linha tênue separando os dois;
 
 Em vez de mudar o estado, as ações confirmam (ou fazem commit de) mutações.
 As ações podem conter operações assíncronas arbitrárias.
