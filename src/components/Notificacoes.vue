@@ -1,0 +1,31 @@
+<template>
+  <div class="notificacoes">
+    <article class="message is-success">
+      <div class="message-header">Atenção!</div>
+      <div class="message-body">Texto legal</div>
+    </article>
+    <article class="message is-warning">
+      <div class="message-header">Atenção!</div>
+      <div class="message-body">Texto legal</div>
+    </article>
+    <article class="message is-danger">
+      <div class="message-header">Atenção!</div>
+      <div class="message-body">Texto legal</div>
+    </article>
+  </div>
+</template>
+<script>
+import { defineComponent } from "vue";
+export default defineComponent({
+  name: "NotificacoesComponent",
+});
+</script>
+<style scoped>
+.notificacoes {
+  position: absolute;
+  right: 0;
+  width: 300px;
+  padding: 8px;
+  z-index: 1;
+}
+</style>
