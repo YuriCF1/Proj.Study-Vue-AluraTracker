@@ -6,7 +6,7 @@
       v-for="(note, index) in notificacoes"
       :key="index"
     >
-      <div class="message-header">{{ note.tipo }}</div>
+      <div class="message-header">{{ note.title }}</div>
       <div class="message-body">{{ note.text }}</div>
     </article>
   </div>
