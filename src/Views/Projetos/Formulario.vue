@@ -24,7 +24,12 @@ import { defineComponent, PropType, computed } from "vue";
 // import IProjeto from '../Interfaces/IProjeto.ts'
 import { useStoreFunction } from "@/store";
 
-import { ADICIONA_PROJETO, EDITA_PROJETO, } from "../../store/TipoDeMutacoes";
+import {
+  ADICIONA_PROJETO,
+  EDITA_PROJETO,
+  NOTIFICAR,
+} from "../../store/TipoDeMutacoes";
+import { TipoDeNotificacao } from "@/Interfaces/INotificacao";
 
 export default defineComponent({
   name: "FormularioComponent",
@@ -57,8 +62,14 @@ export default defineComponent({
       } else {
         this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto);
         this.nomeDoProjeto = "";
+        this.store.commit(NOTIFICAR, {
+          id: "1",
+          title: "Novo projeto foi salvo",
+          text: "Seu projeto está disponível",
+          tipo: TipoDeNotificacao.SUCCESS,
+        });
+        this.$router.push("/projetos");
       }
-      this.$router.push("/projetos");
     },
   },
   setup() {
