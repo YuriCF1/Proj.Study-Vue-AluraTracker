@@ -42,9 +42,7 @@ import { computed, defineComponent } from "vue";
 import TemporiZador from "./Temporizador.vue";
 import { useStoreFunction } from "@/store";
 
-import {
-  NOTIFICAR,
-} from "../store/TipoDeMutacoes";
+import { NOTIFICAR } from "../store/TipoDeMutacoes";
 import { TipoDeNotificacao } from "@/Interfaces/INotificacao";
 
 export default defineComponent({
@@ -70,7 +68,9 @@ export default defineComponent({
   },
   methods: {
     finalizarTarefa(tempoDecorridoRecebido: number): void {
-      const projeto = this.projetosComputedEstado.find((p) => p.id == this.idProjeto);
+      const projeto = this.projetosComputedEstado.find(
+        (p) => p.id == this.idProjeto
+      );
       if (!projeto) {
         this.store.commit(NOTIFICAR, {
           title: "Ops!",
