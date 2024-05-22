@@ -18,17 +18,14 @@
     </form>
   </section>
 </template>
-<script>
+<script lang="ts">
 import { defineComponent, PropType, computed } from "vue";
-
-// import IProjeto from '../Interfaces/IProjeto.ts'
 import { useStoreFunction } from "@/store";
 
-import {
-  ADICIONA_PROJETO,
-  EDITA_PROJETO,
-  NOTIFICAR,
-} from "../../store/TipoDeMutacoes";
+//A ideia do Mixin é sempre reaproveitar código
+import { notificacaoMixin } from "../../mixins/notificar";
+
+import { ADICIONA_PROJETO, EDITA_PROJETO } from "../../store/TipoDeMutacoes";
 import { TipoDeNotificacao } from "@/Interfaces/INotificacao";
 
 export default defineComponent({
@@ -38,13 +35,13 @@ export default defineComponent({
       type: String,
     },
   },
+  mixins: [notificacaoMixin],
   mounted() {
-    console.log("Mounted IF");
     if (this.idProps) {
       const buscandoProjeto = this.store.state.projetos.find(
         (proj) => proj.id == this.idProps
       );
-      this.nomeDoProjeto = buscandoProjeto?.nome;
+      this.nomeDoProjeto = buscandoProjeto?.nome || "";
     }
   },
   data() {
@@ -62,12 +59,11 @@ export default defineComponent({
       } else {
         this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto);
         this.nomeDoProjeto = "";
-        this.store.commit(NOTIFICAR, {
-          id: "1",
-          title: "Novo projeto foi salvo",
-          text: "Seu projeto está disponível",
-          tipo: TipoDeNotificacao.SUCCESS,
-        });
+        this.notificar(
+          TipoDeNotificacao.SUCCESS,
+          "Excelente!",
+          "O projeto foi cadastrado com sucesso."
+        );
         this.$router.push("/projetos");
       }
     },
