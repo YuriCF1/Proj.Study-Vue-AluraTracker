@@ -23,10 +23,12 @@ import { defineComponent, PropType, computed } from "vue";
 import { useStoreFunction } from "@/store";
 
 //A ideia do Mixin é sempre reaproveitar código
-import { notificacaoMixin } from "../../mixins/notificar";
+// import { notificacaoMixin } from "../../mixins/notificar";
 
 import { ADICIONA_PROJETO, EDITA_PROJETO } from "../../store/TipoDeMutacoes";
 import { TipoDeNotificacao } from "@/Interfaces/INotificacao";
+
+import useNotificador from "../../Hooks/useNotificador"
 
 export default defineComponent({
   name: "FormularioComponent",
@@ -35,7 +37,7 @@ export default defineComponent({
       type: String,
     },
   },
-  mixins: [notificacaoMixin],
+  // mixins: [notificacaoMixin],
   mounted() {
     if (this.idProps) {
       const buscandoProjeto = this.store.state.projetos.find(
@@ -70,8 +72,10 @@ export default defineComponent({
   },
   setup() {
     const store = useStoreFunction();
+    const { notificar } = useNotificador();
     return {
       store,
+      notificar
     };
   },
 });
